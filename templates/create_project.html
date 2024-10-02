@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Create New Project</h1>
+    <form method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>Please correct the following errors:</strong>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            {{ form.project_name.label }}
+            {{ form.project_name }}
+        </div>
+        <div class="mb-3">
+            {{ form.description.label }}
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            {{ form.image1.label }}
+            {{ form.image1 }}
+        </div>
+        <div class="mb-3">
+            {{ form.image2.label }}
+            {{ form.image2 }}
+        </div>
+        <div class="mb-3">
+            {{ form.github_link.label }}
+            {{ form.github_link }}
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">Create Project</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

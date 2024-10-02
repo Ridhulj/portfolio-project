@@ -1,0 +1,18 @@
+<!-- templates/confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block content %}
+<div class="mt-5">
+    <h1 class="text-center mb-4">Confirm Deletion</h1>
+    <div class="alert alert-warning text-center">
+        <strong>Are you sure you want to delete the project "{{ project.project_name }}"?</strong>
+    </div>
+    <form method="POST" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'project_showcase' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

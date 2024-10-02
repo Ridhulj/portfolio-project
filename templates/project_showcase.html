@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <h1 class="text-center mb-4 py-4">Project Showcase</h1>
+    <div class="row justify-content-center">
+        {% for project in projects %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.project_name }}</h5>
+
+                        <!-- Description Section -->
+                        <h6 class="mt-3">Description:</h6>
+                        <p class="card-text">{{ project.description|truncatewords:30 }}</p>
+
+                        <!-- Project Images Section -->
+                        <h6 class="mt-3">Project Images:</h6>
+                        <div class="image-container mb-2">
+                            {% if project.image1 %}
+                                <img src="{{ project.image1.url }}" class="img-fluid project-image" alt="{{ project.project_name }} - Image 1">
+                            {% endif %}
+                            {% if project.image2 %}
+                                <img src="{{ project.image2.url }}" class="img-fluid project-image" alt="{{ project.project_name }} - Image 2">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ project.github_link }}" class="btn btn-primary" target="_blank">View on GitHub</a>
+                        <a href="{% url 'update_project' project.id %}" class="btn btn-warning mt-2">Update Project</a>
+                         <a href="{% url 'delete_project' project.id %}" class="btn btn-danger mt-2">Delete Project</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <p>No projects available.</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'create_project' %}" class="btn btn-success">Create New Project</a>
+    </div>
+</div>
+
+<style>
+    body {
+        margin: 0; /* Remove default body margin */
+        padding: 0; /* Remove default body padding */
+        background-color: #f8f9fa; /* Optional background color */
+    }
+
+    .image-container {
+        display: flex;
+        flex-direction: column; /* Arrange images vertically */
+        align-items: center; /* Center align the images */
+    }
+
+    .project-image {
+        width: 100%; /* Full width of the card */
+        height: auto; /* Maintain aspect ratio */
+        max-height: 400px; /* Increase max height for larger images */
+        object-fit: cover; /* Cover the area without stretching */
+        margin-bottom: 10px; /* Space between images */
+    }
+
+    .card {
+        border: none; /* Remove card border for a cleaner look */
+        background-color: white; /* Card background color */
+    }
+
+    .container-fluid {
+        max-width: 1200px; /* Increase the max width of the container */
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Larger heading size */
+    }
+
+    h6 {
+        font-size: 1.1rem; /* Subtitle size */
+        margin-bottom: 5px; /* Space below the subtitle */
+        font-weight: bold; /* Bold subtitle for emphasis */
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons */
+        margin: 5px 0; /* Spacing between buttons */
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch; /* Stretch buttons to fill width */
+    }
+</style>
+
+{% endblock %}

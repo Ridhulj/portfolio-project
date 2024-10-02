@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">User Portfolio Details</h1>
+
+    <div class="section mb-5">
+        <h3 class="text-info">Experience</h3>
+        {% if experiences %}
+            <ul class="list-group mb-4">
+                {% for experience in experiences %}
+                    <li class="list-group-item shadow-sm mb-3">
+                        <strong>Job Title:</strong> {{ experience.job_title }} <br>
+                        <strong>Company:</strong> {{ experience.company_name }} <br>
+                        <strong>Location:</strong> {{ experience.location }} <br>
+                        <strong>Duration:</strong> {{ experience.start_date }} - {{ experience.end_date }} <br>
+                        <a href="{% url 'edit_experience' experience.id %}" class="btn btn-warning btn-sm mt-2">Edit Experience</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No experience details available.</p>
+        {% endif %}
+    </div>
+
+    <div class="section mb-5">
+        <h3 class="text-info">Education</h3>
+        {% if education %}
+            <ul class="list-group mb-4">
+                {% for edu in education %}
+                    <li class="list-group-item shadow-sm mb-3">
+                        <strong>School:</strong> {{ edu.school_name }} <br>
+                        <strong>Degree:</strong> {{ edu.degree }} <br>
+                        <strong>Field of Study:</strong> {{ edu.field_of_study }} <br>
+                        <strong>Duration:</strong> {{ edu.start_date }} - {{ edu.end_date }} <br>
+                        <a href="{% url 'edit_education' edu.id %}" class="btn btn-warning btn-sm mt-2">Edit Education</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No education details available.</p>
+        {% endif %}
+    </div>
+
+    <div class="section mb-5">
+        <h3 class="text-info">Certifications</h3>
+        {% if certifications %}
+            <ul class="list-group mb-4">
+                {% for cert in certifications %}
+                    <li class="list-group-item shadow-sm mb-3">
+                        <strong>Certification Name:</strong> {{ cert.certification_name }} <br>
+                        <strong>Issuing Organization:</strong> {{ cert.issuing_organization }} <br>
+                        <strong>Issued On:</strong> {{ cert.issue_date }} <br>
+                        <strong>Expiration Date:</strong> {{ cert.expiration_date }} <br>
+                        <a href="{% url 'edit_certification' cert.id %}" class="btn btn-warning btn-sm mt-2">Edit Certification</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No certifications available.</p>
+        {% endif %}
+    </div>
+
+    <div class="mt-4 text-center">
+        {% if not experiences and not education and not certifications %}
+            <a href="{% url 'createdetails' %}" class="btn btn-success btn-lg">Add Details</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

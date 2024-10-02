@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Create Your Profile</h1>
+
+        <!-- Profile creation form -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="id_full_name">Full Name</label>
+                {{ form.full_name }}
+                {% if form.full_name.errors %}
+                    <div class="text-danger">
+                        {{ form.full_name.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Bio -->
+            <div class="form-group">
+                <label for="id_bio">Bio</label>
+                {{ form.bio }}
+                {% if form.bio.errors %}
+                    <div class="text-danger">
+                        {{ form.bio.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group">
+                <label for="id_skills">Skills</label>
+                {{ form.skills }}
+                {% if form.skills.errors %}
+                    <div class="text-danger">
+                        {{ form.skills.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label for="id_phone_number">Phone Number</label>
+                {{ form.phone_number }}
+                {% if form.phone_number.errors %}
+                    <div class="text-danger">
+                        {{ form.phone_number.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="id_email">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="text-danger">
+                        {{ form.email.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="id_location">Location</label>
+                {{ form.location }}
+                {% if form.location.errors %}
+                    <div class="text-danger">
+                        {{ form.location.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Create Profile</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-primary">User Profile</h1>
+
+        {% if portfolio %}
+            <div class="card shadow-lg mb-4">
+                <div class="card-body">
+                    <h3 class="card-title text-uppercase text-info">{{ portfolio.full_name }}</h3>
+                    <p class="card-text">
+                        <strong class="text-dark">Bio:</strong>
+                        <span class="text-muted">{{ portfolio.bio }}</span>
+                    </p>
+                    <p class="card-text">
+                        <strong class="text-dark">Skills:</strong>
+                        <span class="badge bg-success">{{ portfolio.skills }}</span>
+                    </p>
+                    <p class="card-text">
+                        <strong class="text-dark">Phone Number:</strong>
+                        <span class="text-muted">{{ portfolio.phone_number }}</span>
+                    </p>
+                    <p class="card-text">
+                        <strong class="text-dark">Email:</strong>
+                        <span class="text-muted">{{ portfolio.email }}</span>
+                    </p>
+                    <p class="card-text">
+                        <strong class="text-dark">Location:</strong>
+                        <span class="text-muted">{{ portfolio.location }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <a href="{% url 'update_portfolio' portfolio.id %}" class="btn btn-primary px-4 py-2 shadow-sm">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+            </div>
+        {% else %}
+            <div class="mt-5 text-center">
+                <a href="{% url 'create_portfolio' %}" class="btn btn-secondary px-5 py-2 shadow-lg">
+                    <i class="fas fa-user-plus"></i> Create New Profile
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
